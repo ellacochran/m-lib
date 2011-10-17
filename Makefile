@@ -5,6 +5,9 @@ all : m.js
 clean :
 	@rm -f m.src.js m.js src/*.js.cmt
 
+dist : m.js
+	@rm -f src/*.js.cmt
+
 %.js.cmt : %.js
 	@echo "/* TOP OF FILE : $^ */" > $@
 	@cat $^ >> $@
