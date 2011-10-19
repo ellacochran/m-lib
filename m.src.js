@@ -1,11 +1,44 @@
+/*
+SOME THESE LIBRARIES WERE COLLECTED AND ADAPTED OVER THE LAST SEVERAL YEARS FORM VARIOUS OPEN-SOURCE SOURCES. NOT ALL OF THEM CAN BE 
+RECOVERED AT THIS TIME. MOST OF THE LIBRARIES HAVE BEEN SUBSTANTIALLY ADAPTED. IF YOU KNOW WHERE THEY CAME FROM, PLEASE CONTACT
+ME. I DO FEEL THOUGH THAT THE INTENTION OF THE ORIGINAL AUTHORS WAS ALWAYS TO ALLOW FOR THE ADAPTION AND REDISTRIBUTION OF THESE
+PARTS IN AN OPEN MANNER, SO THAT I FEEL COMFORTABLE WITH REDISTRIBUTING THESE ADAPTIONS IN THIS FORM.
+
+The collection as a whole (minus some of the libraries marked in their source files) are
+
+Copyright (c) 2011 Ella Cochran <ellacochran@rocketmail.com>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
+files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy,
+modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software
+is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
+IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+/*
+** © 2011 by Ella Cochran <ellacochran@rocketmail.com>
+** Licensed under the MIT License
+*/
+
 (function() {
   if ('function' !== typeof window.m) {
+    var modules = {};
     var m = window.m = function(name, maker) {
       if (!name) return m.modules;
       if ('function' === typeof maker) {
+        maker.m = m;
+        modules[name] = maker;
+        return;
+      }
+      if (modules[name] && (modules[name].m == m)) {
         m.exports = {};
-        maker(m.exports, m);
-        m.modules[name] = m.exports;
+        modules[name](m.exports, m);
+        modules[name] = m.exports;
         m.exports = undefined;
       }
       return m.modules[name];
@@ -16,6 +49,12 @@
 
 
 /* TOP OF FILE : src/aes.js */
+/*
+** © by an unknown author and released under an OSI License.
+** If you are the original author or know who the original author is,
+** please contact Ella Cochran <ellacochran@rocketmail.com>
+*/
+
 m('aes', function(exports, module) {
   var SBox = [ 99, 124, 119, 123, 242, 107, 111, 197, 48, 1, 103, 43, 254, 215, 171, 118, 202, 130, 201, 125, 250, 89, 71, 240, 173, 212, 162, 175, 156, 164, 114, 192, 183, 253, 147, 38, 54, 63, 247, 204, 52, 165, 229, 241, 113, 216, 49, 21, 4, 199, 35, 195, 24, 150, 5, 154, 7, 18, 128, 226, 235, 39, 178, 117, 9, 131, 44, 26, 27, 110, 90, 160, 82, 59, 214, 179, 41, 227, 47, 132, 83, 209, 0, 237, 32, 252, 177, 91, 106, 203, 190, 57, 74, 76, 88, 207, 208, 239, 170, 251, 67, 77, 51, 133, 69, 249, 2, 127, 80, 60, 159, 168, 81, 163, 64, 143, 146, 157, 56, 245, 188, 182, 218, 33, 16, 255, 243, 210, 205, 12, 19, 236, 95, 151, 68, 23, 196, 167, 126, 61, 100, 93, 25, 115, 96, 129, 79, 220, 34, 42, 144, 136, 70, 238, 184, 20, 222, 94, 11, 219, 224, 50, 58, 10, 73, 6, 36, 92, 194, 211, 172, 98, 145, 149, 228, 121, 231, 200, 55, 109, 141, 213, 78, 169, 108, 86, 244, 234, 101, 122, 174, 8, 186, 120, 37, 46, 28, 166, 180, 198, 232, 221, 116, 31, 75, 189, 139, 138, 112, 62, 181, 102, 72, 3, 246, 14, 97, 53, 87, 185, 134, 193, 29, 158, 225, 248, 152, 17, 105, 217, 142, 148, 155, 30, 135, 233, 206, 85, 40, 223, 140, 161, 137, 13, 191, 230, 66, 104, 65, 153, 45, 15, 176, 84, 187, 22 ];
   var SBox_Inv;
@@ -187,6 +226,11 @@ m('aes', function(exports, module) {
 /* END OF FILE : src/aes.js */
 
 /* TOP OF FILE : src/array.js */
+/*
+** © 2011 by Ella Cochran <ellacochran@rocketmail.com>
+** Licensed under the MIT License
+*/
+
 m('array', function(exports, module) {
 	if ("function" !== typeof Array.isArray) {
 		Array.isArray = function(value) {
@@ -262,6 +306,12 @@ m('array', function(exports, module) {
 /* END OF FILE : src/array.js */
 
 /* TOP OF FILE : src/async.js */
+/*
+** Copyright (c) 2010 Caolan McMahon
+** Licensed under the MIT License
+** Original to be found at https://github.com/caolan/async
+*/
+
 m('async',function (exports, module) {
 
     var async = module.exports = {};
@@ -892,6 +942,11 @@ m('async',function (exports, module) {
 /* END OF FILE : src/async.js */
 
 /* TOP OF FILE : src/base64.js */
+/*
+** © by an unknown author and released under an OSI License.
+** If you are the original author or know who the original author is,
+** please contact Ella Cochran <ellacochran@rocketmail.com>
+*/
 
 m('base64', function(exports, module){
   var base64map = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
@@ -937,6 +992,12 @@ m('base64', function(exports, module){
 /* END OF FILE : src/base64.js */
 
 /* TOP OF FILE : src/bytes.js */
+/*
+** © by an unknown author and released under an OSI License.
+** If you are the original author or know who the original author is,
+** please contact Ella Cochran <ellacochran@rocketmail.com>
+*/
+
 m('bytes', function(exports, module) {
   // UTF-8 encoding
   var UTF8 = exports.UTF8 = {};
@@ -1059,6 +1120,11 @@ m('bytes', function(exports, module) {
 /* END OF FILE : src/bytes.js */
 
 /* TOP OF FILE : src/cookies.js */
+/*
+** © 2011 by Ella Cochran <ellacochran@rocketmail.com>
+** Licensed under the MIT License
+*/
+
 m('cookies', function(exports, module) {
   var cache = undefined;
 	var Cookies = module.exports = {};
@@ -1087,6 +1153,11 @@ m('cookies', function(exports, module) {
 /* END OF FILE : src/cookies.js */
 
 /* TOP OF FILE : src/css.js */
+/*
+** © 2011 by Ella Cochran <ellacochran@rocketmail.com>
+** Licensed under the MIT License
+*/
+
 m('css', function(exports, module) {
 	var CSS = module.exports = {};
 
@@ -1131,6 +1202,11 @@ m('css', function(exports, module) {
 /* END OF FILE : src/css.js */
 
 /* TOP OF FILE : src/events.js */
+/*
+** © 2011 by Ella Cochran <ellacochran@rocketmail.com>
+** Licensed under the MIT License
+*/
+
 m('events',function(exports, module) {
 	var Emitter = module.exports = function(obj, evts) {
 		obj = obj || this;
@@ -1235,6 +1311,11 @@ m('events',function(exports, module) {
 /* END OF FILE : src/events.js */
 
 /* TOP OF FILE : src/http.js */
+/*
+** © 2011 by Ella Cochran <ellacochran@rocketmail.com>
+** Licensed under the MIT License
+*/
+
 m('http', function(exports, module) {
 	var msid = ["Microsoft.XMLHTTP", "MSXML2.ServerXMLHTTP", "MSXML2.XMLHTTP.5.0", "MSXML2.XMLHTTP.4.0", "MSXML2.XMLHTTP.3.0", "MSXML2.XMLHTTP"];
 	var HTTPRequest = window.XMLHttpRequest || function() {
@@ -1275,6 +1356,12 @@ m('http', function(exports, module) {
 /* END OF FILE : src/http.js */
 
 /* TOP OF FILE : src/json.js */
+/*
+** Public Domain.
+** NO WARRANTY EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK.
+** See http://www.JSON.org/js.html
+*/
+
 m('json', function(exports, module) {
 	var cx = /[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g;
 		var escapable = /[\\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g;
@@ -1914,13 +2001,14 @@ m('rsa',function(exports) {
 /* END OF FILE : src/rsa.js */
 
 /* TOP OF FILE : src/sha1.js */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
+/*  SHA-1 implementation in JavaScript | (c) Chris Veness 2002-2010 | www.movable-type.co.uk      */
+/*   - see http://csrc.nist.gov/groups/ST/toolkit/secure_hashing.html                             */
+/*         http://csrc.nist.gov/groups/ST/toolkit/examples.html                                   */
+/*  Licensed under LGPL                                                                           */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
+
 m('sha1', function(exports, module) {
-  /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
-  /*  SHA-1 implementation in JavaScript | (c) Chris Veness 2002-2010 | www.movable-type.co.uk      */
-  /*   - see http://csrc.nist.gov/groups/ST/toolkit/secure_hashing.html                             */
-  /*         http://csrc.nist.gov/groups/ST/toolkit/examples.html                                   */
-  /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
-  
   var Sha1 = {};  // Sha1 namespace
   
   /**
@@ -2021,13 +2109,14 @@ m('sha1', function(exports, module) {
 /* END OF FILE : src/sha1.js */
 
 /* TOP OF FILE : src/sha256.js */
-m('sha256', function(exports, module) {
-  /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
-  /*  SHA-256 implementation in JavaScript | (c) Chris Veness 2002-2010 | www.movable-type.co.uk    */
-  /*   - see http://csrc.nist.gov/groups/ST/toolkit/secure_hashing.html                             */
-  /*         http://csrc.nist.gov/groups/ST/toolkit/examples.html                                   */
-  /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
-  
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
+/*  SHA-256 implementation in JavaScript | (c) Chris Veness 2002-2010 | www.movable-type.co.uk    */
+/*   - see http://csrc.nist.gov/groups/ST/toolkit/secure_hashing.html                             */
+/*         http://csrc.nist.gov/groups/ST/toolkit/examples.html                                   */
+/*  Licensed under LGPL                                                                           */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
+
+m('sha256', function(exports, module) {  
   var Sha256 = {};  // Sha256 namespace
   
   /**
@@ -2129,6 +2218,11 @@ m('sha256', function(exports, module) {
 });/* END OF FILE : src/sha256.js */
 
 /* TOP OF FILE : src/storage.js */
+/*
+** © 2011 by Ella Cochran <ellacochran@rocketmail.com>
+** Licensed under the MIT License
+*/
+
 m('storage', function(exports, module) {
   var GET = window.localStorage ? (function (name, callback) {
     try {
@@ -2172,6 +2266,11 @@ m('storage', function(exports, module) {
 /* END OF FILE : src/storage.js */
 
 /* TOP OF FILE : src/template.js */
+/*
+** © 2011 by Ella Cochran <ellacochran@rocketmail.com>
+** Licensed under the MIT License
+*/
+
 m('template', function(exports, module) {
 	var Template = module.exports = function(tpltxt) {
 		this.tpltxt = tpltxt;
@@ -2393,12 +2492,13 @@ m('templates', function(exports, module) {
 /* END OF FILE : src/template.js */
 
 /* TOP OF FILE : src/utf8.js */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
+/*  Utf8 class: encode / decode between multi-byte Unicode characters and UTF-8 multiple          */
+/*              single-byte character encoding (c) Chris Veness 2002-2010                         */
+/*  Licensed under LGPL                                                                           */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
+
 m('utf8', function(exports, module) {
-  /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
-  /*  Utf8 class: encode / decode between multi-byte Unicode characters and UTF-8 multiple          */
-  /*              single-byte character encoding (c) Chris Veness 2002-2010                         */
-  /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
-  
   var Utf8 = module.exports = {};  // Utf8 namespace
   
   /**
@@ -2456,6 +2556,11 @@ m('utf8', function(exports, module) {
 /* END OF FILE : src/utf8.js */
 
 /* TOP OF FILE : src/utilities.js */
+/*
+** © 2011 by Ella Cochran <ellacochran@rocketmail.com>
+** Licensed under the MIT License
+*/
+
 m('utils', function(exports, module) {
   exports.delay = function() {
     var delay = arguments[0];

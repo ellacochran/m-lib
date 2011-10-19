@@ -15,7 +15,11 @@ dist : m.js
 	@echo "" >> $@
 
 m.src.js : modules.js $(addsuffix .cmt,$(shell ls src/*.js))
-	@cat $^ > $@
+	@echo "/*" > $@
+	@cat LICENSE >> $@
+	@echo "*/" >> $@
+	@cat $^ >> $@
 
 m.js : m.src.js
-	@cat $^ | jsminify > $@
+	@echo "/* For licensing information go to https://github.com/ellacochran/m-lib */" > $@
+	@cat $^ | jsminify >> $@
