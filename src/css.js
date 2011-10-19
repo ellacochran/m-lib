@@ -40,7 +40,9 @@ m('css', function(exports, module) {
 		return node;
 	};
   CSS.replaceClass = function(node, delclass, addclass) {
-    CSS.delClass(node, delclass);
-    CSS.addClass(node, addclass);
+    if (CSS.hasClass(node, delclass) {
+      CSS.delClass(node, delclass);
+      CSS.addClass(node, addclass);
+    }
   };
 });
