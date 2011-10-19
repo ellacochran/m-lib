@@ -1,3 +1,8 @@
+/*
+** © 2011 by Ella Cochran <ellacochran@rocketmail.com>
+** Licensed under the MIT License
+*/
+
 m('utils', function(exports, module) {
   exports.delay = function() {
     var delay = arguments[0];

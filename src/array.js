@@ -1,3 +1,8 @@
+/*
+** © 2011 by Ella Cochran <ellacochran@rocketmail.com>
+** Licensed under the MIT License
+*/
+
 m('array', function(exports, module) {
 	if ("function" !== typeof Array.isArray) {
 		Array.isArray = function(value) {

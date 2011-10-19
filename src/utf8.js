@@ -1,9 +1,10 @@
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
+/*  Utf8 class: encode / decode between multi-byte Unicode characters and UTF-8 multiple          */
+/*              single-byte character encoding (c) Chris Veness 2002-2010                         */
+/*  Licensed under LGPL                                                                           */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
+
 m('utf8', function(exports, module) {
-  /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
-  /*  Utf8 class: encode / decode between multi-byte Unicode characters and UTF-8 multiple          */
-  /*              single-byte character encoding (c) Chris Veness 2002-2010                         */
-  /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
-  
   var Utf8 = module.exports = {};  // Utf8 namespace
   
   /**

@@ -1,3 +1,8 @@
+/*
+** © by an unknown author and released under an OSI License.
+** If you are the original author or know who the original author is,
+** please contact Ella Cochran <ellacochran@rocketmail.com>
+*/
 
 m('base64', function(exports, module){
   var base64map = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";

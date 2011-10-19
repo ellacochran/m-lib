@@ -1,3 +1,9 @@
+/*
+** Copyright (c) 2010 Caolan McMahon
+** Licensed under the MIT License
+** Original to be found at https://github.com/caolan/async
+*/
+
 m('async',function (exports, module) {
 
     var async = module.exports = {};

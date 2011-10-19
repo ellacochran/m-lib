@@ -1,3 +1,8 @@
+/*
+** © 2011 by Ella Cochran <ellacochran@rocketmail.com>
+** Licensed under the MIT License
+*/
+
 m('storage', function(exports, module) {
   var GET = window.localStorage ? (function (name, callback) {
     try {

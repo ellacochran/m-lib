@@ -1,3 +1,8 @@
+/*
+** © 2011 by Ella Cochran <ellacochran@rocketmail.com>
+** Licensed under the MIT License
+*/
+
 m('css', function(exports, module) {
 	var CSS = module.exports = {};
 

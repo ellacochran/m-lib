@@ -1,3 +1,8 @@
+/*
+** © 2011 by Ella Cochran <ellacochran@rocketmail.com>
+** Licensed under the MIT License
+*/
+
 m('cookies', function(exports, module) {
   var cache = undefined;
 	var Cookies = module.exports = {};

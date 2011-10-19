@@ -1,3 +1,9 @@
+/*
+** © by an unknown author and released under an OSI License.
+** If you are the original author or know who the original author is,
+** please contact Ella Cochran <ellacochran@rocketmail.com>
+*/
+
 m('bytes', function(exports, module) {
   // UTF-8 encoding
   var UTF8 = exports.UTF8 = {};

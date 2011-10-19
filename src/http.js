@@ -1,3 +1,8 @@
+/*
+** © 2011 by Ella Cochran <ellacochran@rocketmail.com>
+** Licensed under the MIT License
+*/
+
 m('http', function(exports, module) {
 	var msid = ["Microsoft.XMLHTTP", "MSXML2.ServerXMLHTTP", "MSXML2.XMLHTTP.5.0", "MSXML2.XMLHTTP.4.0", "MSXML2.XMLHTTP.3.0", "MSXML2.XMLHTTP"];
 	var HTTPRequest = window.XMLHttpRequest || function() {

@@ -1,3 +1,8 @@
+/*
+** © 2011 by Ella Cochran <ellacochran@rocketmail.com>
+** Licensed under the MIT License
+*/
+
 m('template', function(exports, module) {
 	var Template = module.exports = function(tpltxt) {
 		this.tpltxt = tpltxt;
