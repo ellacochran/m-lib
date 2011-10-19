@@ -186,6 +186,7 @@ m('aes', function(exports, module) {
   
   exports.encrypt = function(key, data) {
     m('crypto/bytes').toByteArray(data);
+    m('array');
     key = key.map(function(item) { return item; });
     expandKey(key);
     if (!xtime || !ShiftRowTab_Inv || !SBox_Inv) init();
@@ -200,6 +201,7 @@ m('aes', function(exports, module) {
   };
   exports.decrypt = function(key, data) {
     m('crypto/bytes').toByteArray(data);
+    m('array');
     key = key.map(function(item) { return item; });
     expandKey(key);
     if (!xtime || !ShiftRowTab_Inv || !SBox_Inv) init();
@@ -243,19 +245,6 @@ m('array', function(exports, module) {
 				if (this[idx] == item) return true;
 			}
 			return false;
-		};
-	}
-	if ("function" !== typeof Array.prototype.execEach) {
-		Array.prototype.execEach = function(obj, args) {
-			for (var idx=0; idx<this.length; idx++) {
-				try {
-					if ("function" === typeof this[idx]) {
-						this[idx].apply(obj || this, args || []);
-					}
-				} catch(ex) {
-					try { Console.log(ex); } catch(ignore) {}
-				}
-			}
 		};
 	}
 	if ("function" !== typeof Array.prototype.indexOf) {
@@ -1195,8 +1184,10 @@ m('css', function(exports, module) {
 		return node;
 	};
   CSS.replaceClass = function(node, delclass, addclass) {
-    CSS.delClass(node, delclass);
-    CSS.addClass(node, addclass);
+    if (CSS.hasClass(node, delclass) {
+      CSS.delClass(node, delclass);
+      CSS.addClass(node, addclass);
+    }
   };
 });
 /* END OF FILE : src/css.js */
@@ -1362,6 +1353,11 @@ m('http', function(exports, module) {
 ** See http://www.JSON.org/js.html
 */
 
+/*
+** The functions httpGET, httpPUT and httpPOST are
+** © 2011 by Ella Cochran <ellacochran@rocketmail.com>
+** Licensed under the MIT License
+*/
 m('json', function(exports, module) {
 	var cx = /[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g;
 		var escapable = /[\\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g;
@@ -1534,14 +1530,18 @@ m('json', function(exports, module) {
 		JSON.parse = parse;
 		JSON.stringify = stringify;
 		
-		JSON.httpGET = function(url, callback) {
+		JSON.httpGET = function(url, reviver, callback) {
+		  if ('function' != typeof callback) {
+		    callback = reviver;
+		    reviver = undefined;
+		  }
 			module('http').GET(url, function(err, val) {
 				if (err || !val) {
 					if ('function' === typeof callback) callback.call(this, err);
 					return;
 				}
 				try {
-					if ('function' === typeof callback) callback.call(this, undefined, JSON.parse(val));
+					if ('function' === typeof callback) callback.call(this, undefined, JSON.parse(val, reviver));
 					return;
 				} catch(err) {
 					if ('function' === typeof callback) callback.call(this, err);
@@ -1549,7 +1549,11 @@ m('json', function(exports, module) {
 				}
 			});
 		};
-		JSON.httpPUT = function(url, data ,callback) {
+		JSON.httpPUT = function(url, data, reviver, callback) {
+		  if ('function' != typeof callback) {
+		    callback = reviver;
+		    reviver = undefined;
+		  }
 			try {
 				data = JSON.stringify(data);
 			} catch(err) {
@@ -1561,7 +1565,31 @@ m('json', function(exports, module) {
 					return;
 				}
 				try {
-					if ('function' === typeof callback) callback.call(this, undefined, JSON.parse(val));
+					if ('function' === typeof callback) callback.call(this, undefined, JSON.parse(val, reviver));
+					return;
+				} catch(err) {
+					if ('function' === typeof callback) callback.call(this, err);
+					return;
+				}
+			});
+		};
+		JSON.httpPOST = function(url, data, reviver, callback) {
+  		if ('function' != typeof callback) {
+  		  callback = reviver;
+  		  reviver = undefined;
+  		}
+			try {
+				data = JSON.stringify(data);
+			} catch(err) {
+				if ('function' === typeof callback) callback.call(this, err);
+			}
+			module('http').POST(url, data ,function(err, val) {
+				if (err || !val) {
+					if ('function' === typeof callback) callback.call(this, err);
+					return;
+				}
+				try {
+					if ('function' === typeof callback) callback.call(this, undefined, JSON.parse(val, reviver));
 					return;
 				} catch(err) {
 					if ('function' === typeof callback) callback.call(this, err);
@@ -2328,6 +2356,7 @@ m('template', function(exports, module) {
 		var idx = 0;
 		for (idx=0; idx < node.attributes.length; idx++) children.push(node.attributes[idx]);
 		for (idx=0; idx < node.childNodes.length; idx++) children.push(node.childNodes[idx]);
+		m('array');
 		children = children.map(function(node) {
 			switch(node.nodeType) {
 				case 1: return function(callback) {
@@ -2573,6 +2602,7 @@ m('utils', function(exports, module) {
   
   exports.curry = function(routine) {
     if ('function' !== typeof routine) throw new Error('Illegal Arguments');
+    m('array');
     var that = (this == exports) ? window : this;
     var args = [];
     for (var idx=1; idx<arguments.length; idx++) args.push(arguments[idx]);

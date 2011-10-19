@@ -20,7 +20,7 @@ To use a module from the top-level is also achieved via the m() function. In cas
 m('json').httpGET('/url', function(err, val) {
   if (err) {
     alert('Ooops there was an error: '+err.message);
-  } else {<br>
+  } else {
     alert('Got a JSON Object: '+val);
   }
 });
