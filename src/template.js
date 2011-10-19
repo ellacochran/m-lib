@@ -60,6 +60,7 @@ m('template', function(exports, module) {
 		var idx = 0;
 		for (idx=0; idx < node.attributes.length; idx++) children.push(node.attributes[idx]);
 		for (idx=0; idx < node.childNodes.length; idx++) children.push(node.childNodes[idx]);
+		m('array');
 		children = children.map(function(node) {
 			switch(node.nodeType) {
 				case 1: return function(callback) {

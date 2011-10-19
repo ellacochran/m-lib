@@ -17,19 +17,6 @@ m('array', function(exports, module) {
 			return false;
 		};
 	}
-	if ("function" !== typeof Array.prototype.execEach) {
-		Array.prototype.execEach = function(obj, args) {
-			for (var idx=0; idx<this.length; idx++) {
-				try {
-					if ("function" === typeof this[idx]) {
-						this[idx].apply(obj || this, args || []);
-					}
-				} catch(ex) {
-					try { Console.log(ex); } catch(ignore) {}
-				}
-			}
-		};
-	}
 	if ("function" !== typeof Array.prototype.indexOf) {
 		Array.prototype.indexOf = function(value) {
 			for (var idx=0; idx<this.length; idx++) {

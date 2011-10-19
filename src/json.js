@@ -176,14 +176,18 @@ m('json', function(exports, module) {
 		JSON.parse = parse;
 		JSON.stringify = stringify;
 		
-		JSON.httpGET = function(url, callback) {
+		JSON.httpGET = function(url, reviver, callback) {
+		  if ('function' != typeof callback) {
+		    callback = reviver;
+		    reviver = undefined;
+		  }
 			module('http').GET(url, function(err, val) {
 				if (err || !val) {
 					if ('function' === typeof callback) callback.call(this, err);
 					return;
 				}
 				try {
-					if ('function' === typeof callback) callback.call(this, undefined, JSON.parse(val));
+					if ('function' === typeof callback) callback.call(this, undefined, JSON.parse(val, reviver));
 					return;
 				} catch(err) {
 					if ('function' === typeof callback) callback.call(this, err);
@@ -191,7 +195,11 @@ m('json', function(exports, module) {
 				}
 			});
 		};
-		JSON.httpPUT = function(url, data ,callback) {
+		JSON.httpPUT = function(url, data, reviver, callback) {
+		  if ('function' != typeof callback) {
+		    callback = reviver;
+		    reviver = undefined;
+		  }
 			try {
 				data = JSON.stringify(data);
 			} catch(err) {
@@ -203,7 +211,31 @@ m('json', function(exports, module) {
 					return;
 				}
 				try {
-					if ('function' === typeof callback) callback.call(this, undefined, JSON.parse(val));
+					if ('function' === typeof callback) callback.call(this, undefined, JSON.parse(val, reviver));
+					return;
+				} catch(err) {
+					if ('function' === typeof callback) callback.call(this, err);
+					return;
+				}
+			});
+		};
+		JSON.httpPOST = function(url, data, reviver, callback) {
+  		if ('function' != typeof callback) {
+  		  callback = reviver;
+  		  reviver = undefined;
+  		}
+			try {
+				data = JSON.stringify(data);
+			} catch(err) {
+				if ('function' === typeof callback) callback.call(this, err);
+			}
+			module('http').POST(url, data ,function(err, val) {
+				if (err || !val) {
+					if ('function' === typeof callback) callback.call(this, err);
+					return;
+				}
+				try {
+					if ('function' === typeof callback) callback.call(this, undefined, JSON.parse(val, reviver));
 					return;
 				} catch(err) {
 					if ('function' === typeof callback) callback.call(this, err);

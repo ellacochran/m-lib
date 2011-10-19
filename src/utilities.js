@@ -15,6 +15,7 @@ m('utils', function(exports, module) {
   
   exports.curry = function(routine) {
     if ('function' !== typeof routine) throw new Error('Illegal Arguments');
+    m('array');
     var that = (this == exports) ? window : this;
     var args = [];
     for (var idx=1; idx<arguments.length; idx++) args.push(arguments[idx]);

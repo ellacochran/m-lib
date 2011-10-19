@@ -135,6 +135,7 @@ m('aes', function(exports, module) {
   
   exports.encrypt = function(key, data) {
     m('crypto/bytes').toByteArray(data);
+    m('array');
     key = key.map(function(item) { return item; });
     expandKey(key);
     if (!xtime || !ShiftRowTab_Inv || !SBox_Inv) init();
@@ -149,6 +150,7 @@ m('aes', function(exports, module) {
   };
   exports.decrypt = function(key, data) {
     m('crypto/bytes').toByteArray(data);
+    m('array');
     key = key.map(function(item) { return item; });
     expandKey(key);
     if (!xtime || !ShiftRowTab_Inv || !SBox_Inv) init();
